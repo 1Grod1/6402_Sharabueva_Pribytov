@@ -23,11 +23,6 @@ def REF(A):
         for i in range(r + 1, rows):
             if A[i, lead] != 0:
                 A[i] = A[i]^A[r]
-                
-        #if (max_row!=0 or A[k,r]!=0):
-            #print(r, max_row, A[r,r])
-            #k=k+1
-
     return A
 
 
@@ -91,13 +86,7 @@ def Gresult(A):
 """Сформировать сокращённую матрицу 𝐗, удалив ведущие столбцы матрицы 𝐆∗"""
 def DelLead(A,leadCol):
     for i in reversed(leadCol):
-        #print(i)
         A = np.delete(A, i, 1)
-        #for j in range(len(A)):
-            #print(A[j,i])
-            
-        #for j in range(len(A)):
-             #A[j].pop(i)
     return A
 
 
@@ -136,23 +125,17 @@ def SumRow(A):
     lst = list(range(rows))
     combs = []
     for i in range(2, len(lst)+1):
-        #combs.append(i)
         els = [list(x) for x in itertools.combinations(lst, i)]
-        #print(els,'\n')
         for num in els:
             combs = np.zeros((1,cols),int)
             for j in range(len(num)):
                 combs=combs^A[num[j]]
             A=np.concatenate([A, combs], axis=0)
-            #print(num,"    ",combs,'\n')
-        #combs.append(els)
-    #print(A.shape)
     for i in range(len(A)):
         for j in range(i+1,len(A)):
           if np.array_equal(A[j], A[i]):
                 # Если нужно удалить дубликаты, можно использовать:
                 A = np.delete(A, j)  # Удаление элемента
-    #print(A.shape)
     return A
 
 
@@ -161,7 +144,6 @@ def Ymnoz(G_matr,H_matr):
     rows,cols=G_matr.shape
     num_codes = 2 ** rows
     binary_codes = np.array([[int(bit) for bit in format(i, f'0{rows}b')] for i in range(num_codes)])
-    #print(binary_codes)
     for u in binary_codes:
         v = np.dot(u,G_matr)
         v = np.mod(v,2)
